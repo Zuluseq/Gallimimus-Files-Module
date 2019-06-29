@@ -32,8 +32,11 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+				Zend\Expressive\Template\TemplateRendererInterface::class => Zend\Expressive\Plates\PlatesRenderer::class
             ],
             'factories'  => [
+				Handler\FileHandler::class => Handler\FileHandlerFactory::class,
+				Handler\PingHandler::class => Handler\PingHandlerFactory::class
             ],
         ];
     }
