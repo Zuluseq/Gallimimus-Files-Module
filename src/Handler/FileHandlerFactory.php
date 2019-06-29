@@ -21,8 +21,6 @@ class FileHandlerFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
-//$template = $container->get(TemplateRendererInterface::class);
-
         return new FileHandler(
 				$template,
 				$container->get(AdapterInterface::class),

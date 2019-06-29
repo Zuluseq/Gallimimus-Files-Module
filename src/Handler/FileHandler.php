@@ -8,9 +8,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
-use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\UploadedFile;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Platform;
@@ -31,7 +31,6 @@ use function time;
 
 class FileHandler implements RequestHandlerInterface
 {
-
     private $renderer;
 	private $parameters;
 	private $config;
@@ -106,12 +105,12 @@ class FileHandler implements RequestHandlerInterface
 			'Content-Type' => $contentType,
 		];
 
-
-        return new HtmlResponse($this->renderer->render(
-            'api::img',
-            ['img' => $imageContent]
-        ), 200, $headers);
-
+		return new HtmlResponse(
+			$imageContent,
+			200,
+			['Content-Type' => [$contentType]]
+		);
+ 
 		return $this->byk($plik);
     }
 
