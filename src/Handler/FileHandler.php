@@ -78,20 +78,21 @@ class FileHandler implements RequestHandlerInterface
 		$zera = substr($zera,0,10-strlen($idZaktualizowanegoRekordu.''));
 		$nazwaDocelowa = $zera . $idZaktualizowanegoRekordu;
 		if($opcjaWywolania == "file" || $opcjaWywolania == "img" || $plik["type"] == "svg")
-			$target_file = $pathToImages . DIRECTORY_SEPARATOR . 'originals' . DIRECTORY_SEPARATOR .  $nazwaDocelowa . '.' . $rozszerzenie;
-
-		$target_file = $_SERVER['DOCUMENT_ROOT']. DIRECTORY_SEPARATOR .$target_file;
+		$target_file = $pathToImages . DIRECTORY_SEPARATOR . 'originals' . DIRECTORY_SEPARATOR .  $nazwaDocelowa . '.' . $rozszerzenie;
+		
+		// $target_file = $_SERVER['DOCUMENT_ROOT']. DIRECTORY_SEPARATOR .$target_file;
 		$target_file = str_replace("public",DIRECTORY_SEPARATOR,$target_file);
 		$target_file = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR,DIRECTORY_SEPARATOR,$target_file);
 		$target_file = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR,DIRECTORY_SEPARATOR,$target_file);
-
-		if(($opcjaWywolania == "thmb" || $opcjaWywolania == "ico") && $plik["type"] != "svg")
-			{
-				$target_file_if = $pathToImages . DIRECTORY_SEPARATOR . 'thumbnails' . DIRECTORY_SEPARATOR .  $nazwaDocelowa . '.' . $rozszerzenie;
-				if(file_exists($target_file_if)) $target_file = $target_file_if;
-				else $target_file = $pathToImages . DIRECTORY_SEPARATOR . 'originals' . DIRECTORY_SEPARATOR .  $nazwaDocelowa . '.' . $rozszerzenie;
-			}
-
+		
+		if(($opcjaWywolania == "thmb" || $opcjaWywolania == "thumb" || $opcjaWywolania == "ico") && $plik["type"] != "svg")
+		{
+			$target_file_if = $pathToImages . DIRECTORY_SEPARATOR . 'thumbnails' . DIRECTORY_SEPARATOR .  $nazwaDocelowa . '.' . $rozszerzenie;
+			if(file_exists($target_file_if)) $target_file = $target_file_if;
+			else $target_file = $pathToImages . DIRECTORY_SEPARATOR . 'originals' . DIRECTORY_SEPARATOR .  $nazwaDocelowa . '.' . $rozszerzenie;
+		}
+		// return $this->byk($target_file);
+		
 		$target_file = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR,DIRECTORY_SEPARATOR,$target_file);
 		// return $this->byk($target_file);
 		$imageContent =  file_get_contents($target_file);

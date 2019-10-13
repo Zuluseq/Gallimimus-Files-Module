@@ -36,7 +36,8 @@ class ConfigProvider
             ],
             'factories'  => [
 				Handler\FileHandler::class => Handler\FileHandlerFactory::class,
-				Handler\PingHandler::class => Handler\PingHandlerFactory::class
+				Handler\PingHandler::class => Handler\PingHandlerFactory::class,
+				Handler\UploadHandler::class => Handler\UploadHandlerFactory::class
             ],
         ];
     }
